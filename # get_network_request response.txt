@@ -1,0 +1,71 @@
+# get_network_request response
+## Request https://search.google.com/_/SearchConsoleAggReportUi/data/batchexecute?rpcids=mKtLlc%2CQiNMAd&source-path=%2Fsearch-console%2Fnot-verified&f.sid=-8056445061967715828&bl=boq_searchconsoleserver_20260506.01_p1&hl=en&soc-app=1&soc-platform=1&soc-device=1&_reqid=560400&rt=c
+Status:  [success - 200]
+### Request Headers
+- sec-ch-ua-full-version-list:"Google Chrome";v="147.0.7727.138", "Not.A/Brand";v="8.0.0.0", "Chromium";v="147.0.7727.138"
+- sec-ch-ua-platform:"Windows"
+- referer:https://search.google.com/
+- sec-ch-ua:"Google Chrome";v="147", "Not.A/Brand";v="8", "Chromium";v="147"
+- sec-ch-ua-bitness:"64"
+- sec-ch-ua-model:""
+- sec-ch-ua-mobile:?0
+- x-same-domain:1
+- sec-ch-ua-wow64:?0
+- sec-ch-ua-form-factors:"Desktop"
+- sec-ch-ua-arch:"x86"
+- sec-ch-ua-full-version:"147.0.7727.138"
+- user-agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36
+- content-type:application/x-www-form-urlencoded;charset=UTF-8
+- sec-ch-ua-platform-version:"10.0.0"
+- :authority:search.google.com
+- :method:POST
+- :path:/_/SearchConsoleAggReportUi/data/batchexecute?rpcids=mKtLlc%2CQiNMAd&source-path=%2Fsearch-console%2Fnot-verified&f.sid=-8056445061967715828&bl=boq_searchconsoleserver_20260506.01_p1&hl=en&soc-app=1&soc-platform=1&soc-device=1&_reqid=560400&rt=c
+- :scheme:https
+- accept:*/*
+- accept-encoding:gzip, deflate, br, zstd
+- accept-language:es-ES,es;q=0.9
+- content-length:554
+- cookie:__Secure-BUCKET=CK0E; SOCS=CAISHAgCEhJnd3NfMjAyNTEyMTAtMF9SQzEaAmVzIAEaBgiAt6fKBg; AEC=AaJma5tBIucFkqkb4SDZeH2BmQjUzQpf6fno_8z5zqooz6nDxR9dfmuvoQ; _gid=GA1.3.1033329676.1778337467; OTZ=8600558_48_52_123900_48_436380; NID=531=Zk6T7fFpVWH8FnhhTFJzl7Z9qS-hgy4SKOLNogk5Yhofxi4Y95kif82ZmepYoeGbAkFIBkZooPiRncDcH3KflEKuUnONKmhQic_nCgCbRMtUgGaUPiC5eYzL4pISwHMtay7uQehQ9esJqXYfaBLxYv25kSHffkJlDbjJqOaxUb_X7yCIoyHLE2m9ZJxCAYXKwJyGOHlwo6BHClBAW1yglneMXy2WtwUh-KaDhmiNQ6tbpdtLfjs-CC7A4sxlZlPogMXr3c-IN00dc7mMT0sRJd2StxowB4yYJZCI_6bvaYta8roYe-QaHeMsvtmAsbXFMJZEnFMfwsOJQiysdyTq14MISOt4u2M_BD9PoPbQgiP8uh429PaYbUXPJGUFvvoiznvMn25eOI3oBvAj_JjT3vH3DOCwaLWmbwNXYKzGkrdyU-WtJ3Aws9FfYw3c0OP0sHcHd3LBb5QYZqye0-YZDsD8FGC01OpSt466ECcYyAhR0iMkmO3mzC-b2D_Yb093q-KF-auc8y-QprrZMwHGcB5kTUPRLODQ-BrQZ1CqT_94ScKllcljV3aBP6W_N0ZSODigtNi-hpLxzVajQ-l_f_n9f0V97mEHYXVHtJERFXzeaqRCZNFKiRUyINCyZSCvfCCKWU3FKNGHqWwByHSVD9si5awTXO7ex5w_y6N1m1RaWCzi43DgHXJqlOcLOH8mUqARW89LtfiDgslDkRBMGLSlEg_PzEIIJqJlO6etefjpphhcFWaWEqXdNWtfNhyCwA2eHSlnasoLMl-Knul5mg; SID=g.a0009wjL5drNdpfpB10lc28P1r2mp5DKnkcpW5j_ACZ_L_u0EXhQmtOtbBvxjkdhHS-Iw73kMAACgYKAfESARYSFQHGX2MiJiuSsb7hqXjsscvB9rvWTBoVAUF8yKprhSUIAiepbP1XFpklSVYw0076; __Secure-1PSID=g.a0009wjL5drNdpfpB10lc28P1r2mp5DKnkcpW5j_ACZ_L_u0EXhQnU2Zm44ZjnUq3Pk0zE7bbQACgYKAdMSARYSFQHGX2MiyKQgTJXpo3i1M5OFWCSb_RoVAUF8yKpnysyPibLsauNWS0kYi9VI0076; __Secure-3PSID=g.a0009wjL5drNdpfpB10lc28P1r2mp5DKnkcpW5j_ACZ_L_u0EXhQvdHsaOF4A7MkdeXfjotVxwACgYKARcSARYSFQHGX2Mi9AykjpHHikOv-FNgrD2fqRoVAUF8yKppn7EnDfOtOnJLoQdM91av0076; HSID=AR6-6b9HXgTy3SBnQ; SSID=AlkfO1MfG-GmlNRJv; APISID=urY9TrBReWTZcwcb/AaJi-riFa2-AigIoQ; SAPISID=Yn9P_KWahBg1qUZn/AJ0sJuUrFoCfq_lX8; __Secure-1PAPISID=Yn9P_KWahBg1qUZn/AJ0sJuUrFoCfq_lX8; __Secure-3PAPISID=Yn9P_KWahBg1qUZn/AJ0sJuUrFoCfq_lX8; _ga=GA1.1.901607153.1778337466; __Secure-1PSIDTS=sidts-CjEBhkeRd3Bvyu2qLTwe4IJ59cPg7qK62FA8yc86R-q6ehvLUrVVxiK3PsUk85uJJbQmEAA; __Secure-3PSIDTS=sidts-CjEBhkeRd3Bvyu2qLTwe4IJ59cPg7qK62FA8yc86R-q6ehvLUrVVxiK3PsUk85uJJbQmEAA; SIDCC=AKEyXzVqV8IGfq9J4Ll3Iu77EcMC2uxMqnbJxYdtevIkBLNSPNFBlfu0ZodBJF-ZhDUJ3n3c; __Secure-1PSIDCC=AKEyXzXbMJRJbOcnLIquHeb6ZjwtIgy2APkVVChtQEc1YuV6ZFWJH2xCOTMjM91oopBnRX0PVA; __Secure-3PSIDCC=AKEyXzVip7SS8miNQHTQmVGzfdRSZtEOC_aDMTqbjLAx_Hfxu8yM6rzgupE1Zrt0k3HhKENZow; _ga_QX2LK1FZEG=GS2.1.s1778337466$o1$g1$t1778338006$j52$l0$h0
+- origin:https://search.google.com
+- priority:u=1, i
+- sec-fetch-dest:empty
+- sec-fetch-mode:cors
+- sec-fetch-site:same-origin
+- x-browser-channel:stable
+- x-browser-copyright:Copyright 2026 Google LLC. All Rights Reserved.
+- x-browser-validation:jaO2vvOiPp81rvmaLFByfP/P8kY=
+- x-browser-year:2026
+- x-client-data:CKmdygEIlaHLAQiFoM0BCMa/zwEIzMeUMBiLwM8B
+### Request Body
+f.req=%5B%5B%5B%22mKtLlc%22%2C%22%5B%5C%22https%3A%2F%2Fanuncios-trenes.vercel.app%2F%5C%22%5D%22%2Cnull%2C%221%22%5D%2C%5B%22QiNMAd%22%2C%22%5B%5C%22https%3A%2F%2Fanuncios-trenes.vercel.app%2F%5C%22%2C%5C%22https%3A%2F%2Fsearch.google.com%2Fsearch-console%2Fnot-verified%3Foriginal_url%3D%2Fsearch-console%3Futm_source%253Dabout-page%2526resource_id%253Dhttps%3A%2F%2Fanuncios-trenes.vercel.app%2F%26original_resource_id%3Dhttps%3A%2F%2Fanuncios-trenes.vercel.app%2F%5C%22%5D%22%2Cnull%2C%222%22%5D%5D%5D&at=AKBmlWsMspHqDpKaw8iXsnGJjlvj%3A1778337999151&
+### Response Headers
+- accept-ch:Sec-CH-UA-Arch, Sec-CH-UA-Bitness, Sec-CH-UA-Full-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Model, Sec-CH-UA-WoW64, Sec-CH-UA-Form-Factors, Sec-CH-UA-Platform, Sec-CH-UA-Platform-Version
+- alt-svc:h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+- cache-control:no-cache, no-store, max-age=0, must-revalidate
+- content-disposition:attachment; filename="response.bin"; filename*=UTF-8''response.bin
+- content-encoding:gzip
+- content-security-policy:require-trusted-types-for 'script';report-uri /_/SearchConsoleAggReportUi/cspreport
+- content-type:application/json; charset=utf-8
+- cross-origin-opener-policy:same-origin-allow-popups
+- cross-origin-resource-policy:same-site
+- date:Sat, 09 May 2026 14:46:47 GMT
+- expires:Mon, 01 Jan 1990 00:00:00 GMT
+- permissions-policy:ch-ua-arch=*, ch-ua-bitness=*, ch-ua-full-version=*, ch-ua-full-version-list=*, ch-ua-model=*, ch-ua-wow64=*, ch-ua-form-factors=*, ch-ua-platform=*, ch-ua-platform-version=*
+- pragma:no-cache
+- server:ESF
+- set-cookie:SIDCC=AKEyXzVSZKaWgwpd9mTcQoPhGRXyxYm0wFkG3BeuaWd3clqlE7aA4cCRPi6wMA6fzUeYC7QR; expires=Sun, 09-May-2027 14:46:47 GMT; path=/; domain=.google.com; priority=high
+__Secure-1PSIDCC=AKEyXzXS4KffdFdqQ6YS2hMR_jrp7M5-KDwja-UFPPG8m7bPDC9HlHgKEvLJ8tmCiCnePqupzw; expires=Sun, 09-May-2027 14:46:47 GMT; path=/; domain=.google.com; Secure; HttpOnly; priority=high
+__Secure-3PSIDCC=AKEyXzWvA5x_AXbIBJqsmG1jxV5YNUo83FzhmMByTkHKvfpK4vDP9VMYspMZJt7Epe2NmPObcw; expires=Sun, 09-May-2027 14:46:47 GMT; path=/; domain=.google.com; Secure; HttpOnly; priority=high; SameSite=none
+- vary:Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site
+- x-content-type-options:nosniff
+- x-frame-options:SAMEORIGIN
+- x-xss-protection:0
+### Response Body
+)]}'
+
+157
+[["wrb.fr","mKtLlc","[3,false,[[5,false],[1,false],[6,false],[2,false],[4,false]],null,\"https://anuncios-trenes.vercel.app/\",false]",null,null,null,"1"]]
+553
+[["wrb.fr","QiNMAd","[[[1,2,[\"googlef0c98a014fc4e17f.html\"]],[2,2,[\"\\u003cmeta name\\u003d\\\"google-site-verification\\\" content\\u003d\\\"OLQ-Ya5Dvk1iYKMs1zsYYbZFkGBK7YnM3NkgnpIFP4A\\\" /\\u003e\"]],[3,2,[\"\"]],[4,2,[\"\"]],[7,2,[\"google-site-verification\\u003d4S9rLGLisdrNV09W7zGpjkqU-X3m4jK6w9MMAMEVn0c\"],null,null,[\"anuncios-trenes.vercel.app\"]],[8,2,[\"sc45tkaukd5o\",\"gv-parqsxfr3qma6c.dv.googlehosted.com\"],null,null,[\"anuncios-trenes.vercel.app\"]]],4]",null,null,null,"2"],["di",102],["af.httprm",102,"-4093320466087769127",7]]
+25
+[["e",5,null,null,749]]

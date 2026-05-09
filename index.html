@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miguel Train Times | Tu tiempo, bajo control</title>
+    <meta name="description"
+        content="Consulta la llegada del Metro de Barcelona en tiempo real con Miguel Train Times (MTT). Precisión de segundos, simulador PIDS y toda la red de TMB bajo control.">
+    <meta name="keywords"
+        content="metro barcelona, tmb, tiempo real metro, próxima llegada metro, mtt barcelona, miguel train times">
+    <meta name="author" content="Miguel">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="OLQ-Ya5Dvk1iYKMs1zsYYbZFkGBK7YnM3NkgnpIFP4A" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://anuncios-trenes.vercel.app/">
+    <meta property="og:title" content="Miguel Train Times | Tu tiempo, bajo control">
+    <meta property="og:description"
+        content="Consulta la llegada del Metro de Barcelona en tiempo real con precisión de segundos.">
+    <meta property="og:image" content="https://anuncios-trenes.vercel.app/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://anuncios-trenes.vercel.app/">
+    <meta property="twitter:title" content="Miguel Train Times | Tu tiempo, bajo control">
+    <meta property="twitter:description"
+        content="Consulta la llegada del Metro de Barcelona en tiempo real con precisión de segundos.">
+    <meta property="twitter:image" content="https://anuncios-trenes.vercel.app/og-image.jpg">
+
+    <link rel="canonical" href="https://anuncios-trenes.vercel.app/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bcn-blue: #0054A6;
+            --pids-amber: #ff9d00;
+            --pids-bg: #0a0a0a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top right, #f0f4f8, #ffffff);
+            color: #1a1a1a;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+        }
+
+        /* Contenedor PIDS Responsivo */
+        .pids-panel {
+            background-color: var(--pids-bg);
+            border: 4px solid #222;
+            border-radius: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--pids-amber);
+            text-transform: uppercase;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 1), 0 15px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .pids-header {
+            border-bottom: 1px solid #222;
+            color: #eee;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            letter-spacing: 1px;
+            padding: 0.75rem 1rem;
+        }
+
+        .pids-body {
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .pids-text {
+            text-shadow: 0 0 10px var(--pids-amber);
+            font-size: clamp(1rem, 4vw, 2.25rem);
+            line-height: 1.2;
+            word-spacing: 2px;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Parpadeo sutil */
+        .blink {
+            animation: blinker 2s ease-in-out infinite;
+            font-weight: 700;
+        }
+
+        @keyframes blinker {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .scroll-reveal {
+            transition: all 1s cubic-bezier(0.17, 0.55, 0.55, 1);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Estilo para el menú móvil */
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        #mobile-menu.hidden-custom {
+            transform: translateY(-20px);
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-50 px-4 md:px-6 py-4">
+        <div class="max-w-7xl mx-auto glass rounded-2xl px-4 md:px-6 py-3 relative">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <div
+                        class="w-8 h-8 md:w-10 md:h-10 bg-[#0054A6] rounded-lg flex items-center justify-center text-white font-bold text-lg md:text-xl">
+                        M</div>
+                    <span class="font-bold text-lg tracking-tight">MTT <span
+                            class="text-[#0054A6] hidden sm:inline">Train Times</span></span>
+                </div>
+
+                <!-- Desktop Links -->
+                <div class="hidden lg:flex gap-8 font-medium text-sm uppercase tracking-wider">
+                    <a href="#inicio" class="hover:text-[#0054A6] transition-colors">Inicio</a>
+                    <a href="#pids" class="hover:text-[#0054A6] transition-colors">Simulador</a>
+                    <a href="#tecnologia" class="hover:text-[#0054A6] transition-colors">Tecnología</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="https://train-times3.onrender.com/" target="_blank"
+                        class="hidden sm:block btn-blue text-white px-4 md:px-6 py-2 rounded-xl text-xs md:text-sm font-semibold bg-[#0054A6] hover:bg-blue-700 transition-all">
+                        Probar Web App
+                    </a>
+                    <!-- Botón Hamburguesa -->
+                    <button id="menu-btn" class="lg:hidden text-gray-700 focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu"
+                class="hidden-custom lg:hidden absolute left-0 right-0 top-full mt-2 mx-0 p-4 glass rounded-2xl flex flex-col gap-4 text-center font-bold">
+                <a href="#inicio" class="py-3 border-b border-gray-100 hover:text-[#0054A6]"
+                    onclick="toggleMenu()">Inicio</a>
+                <a href="#pids" class="py-3 border-b border-gray-100 hover:text-[#0054A6]"
+                    onclick="toggleMenu()">Simulador</a>
+                <a href="#tecnologia" class="py-3 border-b border-gray-100 hover:text-[#0054A6]"
+                    onclick="toggleMenu()">Tecnología</a>
+                <a href="https://train-times3.onrender.com/" target="_blank"
+                    class="py-4 bg-[#0054A6] text-white rounded-xl">Probar Web App</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="pt-28 md:pt-40 pb-16 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 md:space-y-8 text-center lg:text-left">
+                <div
+                    class="inline-block px-4 py-1 rounded-full bg-blue-50 text-[#0054A6] text-[10px] md:text-xs font-bold uppercase tracking-widest border border-blue-100">
+                    Barcelona Metro Real-Time
+                </div>
+                <h1 class="text-4xl md:text-6xl xl:text-7xl font-bold leading-tight">
+                    Miguel Train Times: <br>
+                    <span class="text-[#0054A6]">Tu tiempo, bajo control.</span>
+                </h1>
+                <p class="text-base md:text-lg text-gray-600 max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                    Consulta la llegada de tu próximo metro en Barcelona con precisión de segundos. Datos en tiempo real
+                    de toda la red para que nunca más pierdas un tren.
+                </p>
+
+                <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+                    <a href="https://train-times3.onrender.com/" target="_blank"
+                        class="bg-[#0054A6] text-white px-8 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:shadow-xl hover:shadow-blue-200 transition-all active:scale-95">
+                        <i class="fas fa-external-link-alt"></i> Probar Web App
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative flex justify-center items-center mt-12 lg:mt-0">
+                <div class="absolute w-64 h-64 md:w-80 md:h-80 bg-blue-400/20 rounded-full blur-3xl -z-10"></div>
+                <!-- App Mockup Adaptativo -->
+                <div
+                    class="w-[260px] h-[520px] md:w-[280px] md:h-[560px] bg-[#1a1a1a] rounded-[2.5rem] md:rounded-[3rem] border-[8px] border-[#333] relative shadow-2xl overflow-hidden">
+                    <div class="absolute top-0 w-full h-6 bg-[#333] flex justify-center items-end pb-1">
+                        <div class="w-12 h-3 bg-black rounded-full"></div>
+                    </div>
+                    <div class="p-4 pt-10 text-white h-full flex flex-col">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div
+                                class="w-7 h-7 bg-[#0054A6] rounded flex items-center justify-center text-[10px] font-bold">
+                                M</div>
+                            <span class="text-[10px] font-bold uppercase tracking-wider">L3 Catalunya</span>
+                        </div>
+                        <div class="bg-white/5 rounded-2xl p-4 mb-4 border border-white/10">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-[10px] font-bold text-blue-400 uppercase">Trinitat Nova</span>
+                                <span class="text-[10px] text-gray-500">DIRECTO</span>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-end">
+                                    <span class="text-xs">Próximo tren</span>
+                                    <span class="text-2xl font-bold">02:14</span>
+                                </div>
+                                <div class="h-[1px] bg-white/10 w-full"></div>
+                                <div class="flex justify-between text-gray-400">
+                                    <span class="text-xs">Siguiente</span>
+                                    <span class="text-lg font-semibold">07:45</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PIDS Simulator Section -->
+    <section id="pids" class="py-20 bg-gray-100 border-y border-gray-200 overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 md:px-6">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#0054A6]">Simulador PIDS</h2>
+                <p class="text-gray-600">Fiel reproducción del sistema de información del Metro.</p>
+            </div>
+
+            <!-- PIDS Component -->
+            <div class="pids-panel">
+                <div class="pids-header flex justify-between items-center bg-[#151515]">
+                    <span id="pids-destination-header" class="font-bold">Andén sentido Trinitat Nova</span>
+                    <span class="opacity-50 hidden sm:inline">TMB Info</span>
+                </div>
+
+                <div class="pids-body">
+                    <div id="pids-content" class="pids-text">
+                        <!-- Inyectado por JS -->
+                    </div>
+                </div>
+
+                <div
+                    class="px-4 py-3 border-t border-[#222] flex justify-between items-center text-[9px] md:text-xs bg-[#0a0a0a]">
+                    <div class="flex gap-4 opacity-70">
+                        <span class="text-blue-400 font-bold">L3</span>
+                        <span>ESTACIÓN: CATALUNYA</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                        <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                        <span>SYNC OK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tecnología -->
+    <section id="tecnologia" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold mb-4">Construido con <span class="text-[#0054A6]">Tecnología Top.</span></h2>
+            <p class="text-gray-600">Eficiencia y rapidez para el entorno urbano.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="glass p-8 rounded-[2rem] text-center">
+                <i class="fab fa-react text-4xl mb-4 text-[#0054A6]"></i>
+                <h3 class="font-bold mb-2">React</h3>
+                <p class="text-gray-500 text-sm">Componentes reactivos para datos en vivo.</p>
+            </div>
+            <div class="glass p-8 rounded-[2rem] text-center">
+                <i class="fab fa-js text-4xl mb-4 text-yellow-500"></i>
+                <h3 class="font-bold mb-2">JavaScript</h3>
+                <p class="text-gray-500 text-sm">Lógica asíncrona de alto rendimiento.</p>
+            </div>
+            <div class="glass p-8 rounded-[2rem] text-center">
+                <i class="fab fa-html5 text-4xl mb-4 text-orange-600"></i>
+                <h3 class="font-bold mb-2">HTML5</h3>
+                <p class="text-gray-500 text-sm">Estructura semántica y moderna.</p>
+            </div>
+            <div class="glass p-8 rounded-[2rem] text-center">
+                <i class="fas fa-mobile-alt text-4xl mb-4 text-purple-600"></i>
+                <h3 class="font-bold mb-2">Responsivo</h3>
+                <p class="text-gray-500 text-sm">Perfecto en cualquier dispositivo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-200 text-center text-gray-500 px-6">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-sm">© 2026 Miguel Train Times. Proyecto de Miguel para Barcelona.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Lógica del Menú Hamburguesa
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden-custom');
+            if (mobileMenu.classList.contains('hidden-custom')) {
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            } else {
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        // Lógica del PIDS Simulador
+        const pidsContent = document.getElementById('pids-content');
+        const pidsHeader = document.getElementById('pids-destination-header');
+
+        const messages = [
+            { text: 'PRÓXIMO TREN LLEGARÁ EN <span class="blink">02</span> MIN — TRINITAT NOVA', destination: 'Trinitat Nova' },
+            { text: 'SIGUIENTE TREN: <span class="blink">07</span> MIN — TRINITAT NOVA', destination: 'Trinitat Nova' },
+            { text: 'EL PRÓXIMO TREN VA A EFECTUAR SU ENTRADA EN LA ESTACIÓN.', destination: 'Trinitat Nova' },
+            { text: 'DEJEN SALIR ANTES DE ENTRAR.', destination: 'Trinitat Nova' }
+        ];
+
+        let msgIndex = 0;
+
+        function updatePIDS() {
+            pidsContent.style.opacity = '0';
+            setTimeout(() => {
+                const current = messages[msgIndex];
+                pidsContent.innerHTML = current.text;
+                pidsHeader.innerText = `Andén sentido ${current.destination}`;
+                pidsContent.style.opacity = '1';
+                msgIndex = (msgIndex + 1) % messages.length;
+            }, 500);
+        }
+
+        setInterval(updatePIDS, 6000);
+        updatePIDS();
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section, .glass').forEach(el => {
+            el.classList.add('scroll-reveal');
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
