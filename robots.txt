@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://anuncios-trenes.vercel.app/sitemap.xml
+Sitemap: https://miguel-train-times.vercel.app/sitemap.xml
